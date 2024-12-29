@@ -27,7 +27,7 @@ function Banner(){
     setError(null); // Clear previous errors
     try {
       const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=${apikey}`
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${searchTerm}?key=${apikey} `
       );
       if (!res.ok) throw new Error("Failed to fetch data");
 
@@ -57,8 +57,8 @@ function Banner(){
   
 
 
-
-  const apikey='e4adfdc2807201ea090b4a4ca0b60e0d';
+ const geoApiKey = '66ed3b80d326f482083849rtke61975';
+  const apikey='AY8ARGU6JCGAMR6ASKCBSZQ7H';
 
   const getUserLocation = () => {
     return new Promise((resolve, reject) => {
@@ -79,27 +79,25 @@ function Banner(){
   const getWeather = async (setWeather) => {
     try {
       const coords = await getUserLocation();
-      const location = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${coords.latitude}&lon=${coords.longitude}&limit=5&appid=${apikey}`);
+      const location = await fetch(`https://geocode.maps.co/reverse?lat=${coords.latitude}&lon=${coords.longitude}&api_key=${geoApiKey}`);
       if (!location.ok) throw new Error("Failed to fetch location data");
   
       const locationData = await location.json();
       // console.log(locationData);
       
   
-      const city = locationData[0].name || locationData.town || locationData.village;
-      const country = locationData[0].country;
+      const city = locationData.address.city || locationData.town || locationData.village;
+      const country = locationData.address.country;
   
       if (!city || !country) throw new Error("City or country not found in location data");
   
       
-      const weatherResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${apikey}`
-      );
+      const weatherResponse = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city},${country}?key=${apikey} `);
   
       if (!weatherResponse.ok) throw new Error("Failed to fetch weather data");
   
       const weatherData = await weatherResponse.json();
-      // console.log("Weather Data:", weatherData);
+      console.log("Weather Data:", weatherData);
   
       setWeather(weatherData); // Update state once
     } catch (error) {
@@ -136,11 +134,11 @@ function Banner(){
   
 
   
-  
+  // url(${weather?.getCurrentConditions.snow > 0 ? '/img/banner.png' : weather?.getCurrentConditions.conditions === 'rain' ? '/img/rain.jpg' : weather?getCurrentConditions.cloudCover > 60 ? '/img/cloudy.jpg' : '/img/sunny-day.jpg'})
   
  
   return (
-    <div className="banner"  style={{ backgroundImage: `url(${weather?.list[0].weather[0].main === 'Snow' ? '/img/banner.png' : weather?.list[0].weather[0].main === 'Rain' ? '/img/rain.jpg' : weather?.list[0].weather[0].main === 'Clouds' ? '/img/cloudy.jpg' : '/img/sunny-day.jpg'})`, width:"100%", height: "100vh",backgroundSize: "cover", backgroundRepeat:"no-repeat" }}>
+    <div className="banner"  style={{ backgroundImage: `url(${weather?.currentConditions.snow > 0 ? '/img/banner.png' : weather?.currentConditions.conditions === 'rain' ? '/img/rain.jpg' : weather?.currentConditions.cloudcover > 60 ? '/img/cloudy.jpg' : '/img/sunny-day.jpg'})`, width:"100%", height: "100vh",backgroundSize: "cover", backgroundRepeat:"no-repeat" }}>
       <nav className="navbar container">
         <div>
           <img className="logo" src="img/logo.png" alt="" />
@@ -204,7 +202,7 @@ function LocationForecast({ weather }) {
   useEffect(() => {
     const updateClock = () => {
       // Get the current time in the specified location's time zone
-      const now = DateTime.now().setZone(weather?.city.coord.timezone);
+      const now = DateTime.now().setZone(weather?.timezone);
 
       // Format the current time and date
       const formattedTime = now.toFormat('HH:mm:ss');
@@ -222,13 +220,13 @@ function LocationForecast({ weather }) {
 
     // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(intervalId);
-  }, [weather?.city.coord.timezone]); // Rerun whenever the locationTimeZone changes
+  }, [weather?.timezone]); // Rerun whenever the locationTimeZone changes
 
   return (
     <div className="forecast">
-      <h1>{Math.trunc(weather?.list[0].main.temp - 273.15 )}°</h1>
+      <h1>{parseInt((5/9) *(weather?.currentConditions.temp - 32))}°</h1>
       <div className="txt">
-        <h2>{weather?.city.name}, {weather?.city.country}</h2>
+        <h2>{weather?.address}</h2>
         <h3>
           {time} - {date}
         </h3>
@@ -242,29 +240,29 @@ function LocationForecast({ weather }) {
 function TodayForecast({weather}){
   return (
     <div className="table">
-          <h3>{weather?.list[0].weather[0].description}
+          <h3>{weather?.currentConditions.conditions}
     </h3>
       <table>
         <tbody>
           <tr>
             <td>Temp max</td>
-            <td>{parseInt(weather?.list[0].main.temp_max - 273.15)}° <i className="text-danger bi bi-thermometer-half"></i></td>
+            <td>{parseInt((5/9) *(weather?.days[0].tempmax - 32))}° <i className="text-danger bi bi-thermometer-half"></i></td>
           </tr>
           <tr>
             <td>Temp min</td>
-            <td>{parseInt(weather?.list[0].main.temp_min - 273.15)}° <i className="text-danger bi bi-thermometer-half"></i></td>
+            <td>{parseInt((5/9) *(weather?.days[0].tempmin - 32))}° <i className="text-danger bi bi-thermometer-half"></i></td>
           </tr>
           <tr>
             <td>Humidity</td>
-            <td>{weather?.list[0].main.humidity}% <i className="bi bi-droplet"></i></td>
+            <td>{weather?.currentConditions.humidity}% <i className="bi bi-droplet"></i></td>
           </tr>
           <tr>
             <td>Cloudy</td>
-            <td>{weather?.list[0].clouds.all}% <i className="bi bi-clouds"></i></td>
+            <td>{weather?.currentConditions.cloudcover}% <i className="bi bi-clouds"></i></td>
           </tr>
           <tr>
             <td>Wind</td>
-            <td>{weather?.list[0].wind.speed}km/h <i className="bi bi-wind"></i></td>
+            <td>{weather?.currentConditions.windspeed}km/h <i className="bi bi-wind"></i></td>
           </tr>
         </tbody>
       </table>
@@ -277,17 +275,18 @@ function TodayForecast({weather}){
 function FutureForecast({weather}){
   return (
     <div className="future">
-<h3>Hourly forecast</h3>
+<h3>Daily forecast</h3>
         <div className="forecast-list">
-{weather?.list.slice(1, 5).map(day =>
+{weather?.days.slice(1, 5).map(day =>
   <div className="forecast-item">
   <span className="forecast-icon">
-  {day.weather[0].main === 'Snow' ? '❄️' : day.weather[0].main === 'Rain' ? '🌧️' : day.weather[0].main === 'Clouds' ? '🌥️' : '🌞'}
+    
+  {day.snow > 0  ? '❄️'  : day.cloudcover > 60 ? '🌥️' : '🌞'}
 
   </span>
-  <span className="forecast-time">{day.dt_txt}</span>
-  <span className="forecast-temperature">{parseInt(weather?.list[0].main.temp_min - 273.15)}°</span> 
-  <span className="forecast-temperature">{parseInt(weather?.list[0].main.temp_max - 273.15)}°</span>
+  <span className="forecast-time">{day.datetime}</span>
+  <span className="forecast-temperature">{parseInt((5/9) *(weather?.days[0].tempmin - 32))}°</span> 
+  <span className="forecast-temperature">{parseInt((5/9) *(weather?.days[0].tempmax - 32))}°</span>
   
 </div>
 )}
