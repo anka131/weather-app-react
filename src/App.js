@@ -49,11 +49,11 @@ function Banner(){
     }
   };
 
-  // const resSearch = useMemo(() => {
-  //   return location.filter((loc) => loc.resolvedAddress.toUpperCase().includes(searchTerm.toUpperCase()));
-  // },[searchTerm, location]);
+  const resSearch = useMemo(() => {
+    return location.filter((loc) => loc.resolvedAddress.toUpperCase().includes(searchTerm.toUpperCase()));
+  },[searchTerm, location]);
 
-  // console.log(resSearch);
+  console.log(resSearch);
   
 
 
@@ -140,15 +140,7 @@ function Banner(){
   
  
   return (
-    <div className="banner"  style={{ backgroundImage: `url(${
-      weather?.list[0]?.weather[0]?.main === 'Snow'
-        ? '/img/banner.png'
-        : weather?.list[0]?.weather[0]?.main === 'Rain'
-        ? '/img/rain.jpg'
-        : weather?.list[0]?.weather[0]?.main === 'Clouds'
-        ? '/img/cloudy.jpg'
-        : '/img/sunny-day.jpg'
-    })`, width:"100%", height: "100vh",backgroundSize: "cover", backgroundRepeat:"no-repeat" }}>
+    <div className="banner"  style={{ backgroundImage: `url(${weather?.list[0].weather[0].main === 'Snow' ? '/img/banner.png' : weather?.list[0].weather[0].main === 'Rain' ? '/img/rain.jpg' : weather?.list[0].weather[0].main === 'Clouds' ? '/img/cloudy.jpg' : '/img/sunny-day.jpg'})`, width:"100%", height: "100vh",backgroundSize: "cover", backgroundRepeat:"no-repeat" }}>
       <nav className="navbar container">
         <div>
           <img className="logo" src="img/logo.png" alt="" />
@@ -158,7 +150,7 @@ function Banner(){
   <LocationForecast weather={weather}/>
 
 <div className="sidebar">    
-<SearchLocation  apikey={apikey} onHandleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={setSearchTerm} error={error} />
+<SearchLocation resSearch={resSearch} apikey={apikey} onHandleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={setSearchTerm} error={error} />
   <h4>Weather details...</h4>  
   <TodayForecast  weather={weather}/>
   <FutureForecast weather={weather}/>
@@ -186,7 +178,7 @@ function SearchLocation({ resSearch, loading, onHandleSearch, searchTerm, setSea
         <i className="fa-solid fa-magnifying-glass"></i>
       </button>
 
-     {/* {loading ? (
+     {loading ? (
      <h3>Loading...</h3>
      ):(
       <ul id="searchList">{resSearch.map((loc, idx) => {
@@ -194,7 +186,7 @@ function SearchLocation({ resSearch, loading, onHandleSearch, searchTerm, setSea
       <li key={idx}>{loc.resolvedAddress}</li>
     )
   }) }</ul>
-     )} */}
+     )}
      
 
       {loading && <p>Loading...</p>}
