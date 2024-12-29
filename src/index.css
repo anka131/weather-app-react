@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+:root body {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  margin: 0;
+}
+:root h1, :root h2, :root h3, :root h4, :root h5 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  background-image: url("/public/img/sunny-day.jpg");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35%;
+  height: inherit;
+  background: inherit;
+  filter: blur(10px);
+  box-shadow: -12px -7px 10px rgba(96, 151, 159, 0.676);
+}
+.banner nav {
+  margin-top: 30px;
+  max-width: 80%;
+}
+.banner nav div {
+margin-left: 120px;
+}
+.banner .sidebar input {
+  background: transparent;
+  border-style: none;
+  border-bottom: 1px solid white;
+  font-size: 25px;
+  width: 20em;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  color: white;
+}
+.banner .sidebar input:focus {
+  outline: none;
+}
+.banner .sidebar button  {
+  color: white;
+  background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+  font-size: 30px;
+}
+.banner .forecast {
+  color: white;
+  display: flex;
+  align-items: end;
+  position:absolute;
+  margin-left: 150px;
+  top: 15rem;
+  max-width: 50%;
+}
+.banner .forecast h1 {
+  font-weight: 400;
+  font-size: 13rem;
+}
+.banner .forecast .txt h2 {
+  font-size: 5.5rem;
+}
+.banner .forecast i {
+  font-size: 7rem;
+  padding: 10px;
+}
+.banner .sidebar {
+  overflow-y: scroll;
+  background-color: transparent;
+  height: 100%;
+  width: 35%;
+  position: fixed;
+  top: 5rem;
+  right: -3rem;
+}
+.banner .sidebar .table {
+  --bs-table-bg: transparent;
+  --bs-table-color: $color;
+}
+.banner .sidebar .table h3 {
+  font-size: 35px;
+  margin-top: 6rem;
+}
+.banner .sidebar .table table {
+  width: 100%;
+  height: 35vh;
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+.banner .sidebar .table table tr {
+  border: none;
+}
+.banner .sidebar .future {
+  font-size: 2rem;
+  min-height: 100%;
+  max-width: 70%;
+}
+.banner .sidebar .future::before {
+  content: "";
+  display: block;
+  width: 90%;
+  border: 1px solid white;
+  margin: 120px 0;
+}
+.banner .sidebar .future h3 {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+.banner .sidebar .future .forecast-list .forecast-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding:50px 0;
+}
+.banner .sidebar .future .forecast-list .forecast-item .forecast-icon {
+  font-size: 3.5rem;
+  padding-right: 3rem;
+}
+.banner .sidebar .future .forecast-list .forecast-item .forecast-time {
+  flex: 1;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+.banner .sidebar .future .forecast-list .forecast-item .forecast-temperature {
+  font-size: 1.7rem;
+  padding:0 25px;
+  /* margin-left: 10px; */
+  /* flex: 1; */
+  text-align: center;
+}
