@@ -1,0 +1,9 @@
+/* ErrorBanner.module.css */
+.error {
+  background-color: rgba(255, 0, 0, 0.2);
+  color: red;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  text-align: center;
+}

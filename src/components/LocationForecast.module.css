@@ -1,0 +1,63 @@
+.forecast {
+  color: white;
+  display: flex;
+  align-items: end;
+  position: absolute;
+  margin-left: 150px;
+  top: 15rem;
+  max-width: 50%;
+}
+
+.forecast h1 {
+  font-weight: 400;
+  font-size: 13rem;
+}
+
+.txt h2 {
+  font-size: 5.5rem;
+}
+
+.forecast i {
+  font-size: 7rem;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .forecast {
+    max-height: fit-content;
+    flex-direction: column;
+    position: relative;
+    top: 15px;
+    left: 20%;
+    align-items: center;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .forecast h1 {
+    font-size: 6rem;
+  }
+
+  .txt h2 {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 1024px) {
+  .forecast {
+    position: relative;
+    top: 15px;
+    left: 25%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .forecast h1 {
+    font-size: 6rem;
+  }
+
+  .txt h2 {
+    font-size: 2rem;
+  }
+}

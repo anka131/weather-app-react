@@ -1,0 +1,32 @@
+.table {
+  width: 100%;
+  font-size: 1.6rem;
+  color: white;
+}
+
+.table h3 {
+  font-size: 2.5rem;
+  margin-top: 2rem;
+}
+
+.table table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+}
+
+.table td {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .table h3 {
+    font-size: 2rem;
+  }
+
+  .table td {
+    padding: 0.3rem 0.6rem;
+    font-size: 1.4rem;
+  }
+}

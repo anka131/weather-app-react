@@ -1,0 +1,72 @@
+.future {
+  font-size: 2rem;
+  min-height: 100%;
+  max-width: 100%;
+  padding: 1rem;
+}
+
+.future::before {
+  content: "";
+  display: block;
+  width: 90%;
+  border: 1px solid white;
+  margin: 60px 0;
+}
+
+.future h3 {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+.forecastList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.forecastItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 1rem;
+}
+
+.forecastIcon {
+  font-size: 2.5rem;
+  margin-right: 1rem;
+}
+
+.forecastTime {
+  font-weight: 500;
+  flex: 1;
+  min-width: 100px;
+}
+
+.forecastTemperature {
+  font-size: 1.7rem;
+  padding: 0 10px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .forecastItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .forecastTemperature {
+    padding: 0;
+  }
+
+  .forecastTime {
+    font-size: 1.2rem;
+  }
+
+  .forecastIcon {
+    font-size: 2rem;
+  }
+}
