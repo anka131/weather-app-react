@@ -5,7 +5,7 @@ import TodayForecast from "./TodayForecast";
 import FutureForecast from "./FutureForecast";
 import { useWeather } from "../context/WeatherContext";
 import Spinner from "./Spinner";
-import styles from "./Banner.module.css";
+import styles from "./AppLayout.module.css";
 
 function AppLayout() {
   const {
