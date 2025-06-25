@@ -126,6 +126,7 @@
 
   .sidebar {
     position: static;
+    width: 97%;
     margin-top: 2rem;
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);

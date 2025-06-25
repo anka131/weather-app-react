@@ -1,4 +1,4 @@
-// WeatherContext.js (Refactored)
+
 import { createContext, useContext, useState, useCallback } from "react";
 
 const WeatherContext = createContext();
@@ -10,8 +10,8 @@ export function WeatherProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
-  const API_KEY = "AY8ARGU6JCGAMR6ASKCBSZQ7H";
-  const GEO_API_KEY = "66ed3b80d326f482083849rtke61975";
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+  const GEO_API_KEY = process.env.REACT_APP_GEO_API_KEY;
 
 
   const fetchWeather = useCallback(async (location) => {
