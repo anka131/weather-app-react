@@ -46,3 +46,20 @@ This project was built to practice frontend development, API integration, and re
 - Managing component state and props
 - Responsive UI design
 - Deploying a React application
+
+---
+
+## 🚀 Live Demo
+
+Frontend: (https://weather-app-six-azure-76.vercel.app/)
+
+---
+
+
+## 👤 Author
+
+Anka Knežević 
+
+Junior Frontend / Full-Stack Developer
+
+GitHub: https://github.com/anka131
