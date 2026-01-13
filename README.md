@@ -32,10 +32,9 @@ This project was built to practice frontend development, API integration, and re
 
 ## 📸 Screenshots
 
-_Add screenshots to showcase your app_
 
 ![Home Page](./README-assets/home.png)
-![Search Result](./README-assets/search.png)
+![Search Result](./README-assets/searched.png)
 
 
 ---
